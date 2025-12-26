@@ -24,10 +24,11 @@
     <SqliteZipPath>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile)))</SqliteZipPath>
     <SqliteSrcDirectory>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteSrc)))</SqliteSrcDirectory>
     <SqliteMakefile>$([System.IO.Path]::Combine($(SqliteSrcDirectory),'Makefile'))</SqliteMakefile>
-    <SqliteNativeLibrary>$([System.IO.Path]::Combine($(SqliteSrcDirectory),'libsqlite3.a'))</SqliteNativeLibrary>
+    <SqliteNativeLibrary>/opt/homebrew/Cellar/sqlite/3.51.1/lib/libsqlite3.a</SqliteNativeLibrary>
+    <SqliteNativeLibrary Condition="!Exists($(SqliteNativeLibrary))">$([System.IO.Path]::Combine($(SqliteSrcDirectory),'libsqlite3.a'))</SqliteNativeLibrary>
   </PropertyGroup>
 
-  <Target Name="BuildSqlite" BeforeTargets="LinkNative">
+  <Target Name="BuildSqlite" BeforeTargets="LinkNative" Condition="!Exists($(SqliteNativeLibrary))">
     <DownloadFile SourceUrl="https://sqlite.org/2025/$(SqliteZipFile)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteZipPath))" />
     <Unzip SourceFiles="$(SqliteZipPath)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteSrcDirectory))" />
     <Exec Command="./configure --all" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteMakefile))" />
