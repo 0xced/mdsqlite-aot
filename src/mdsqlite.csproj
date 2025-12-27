@@ -24,7 +24,8 @@
     <SqliteZipPath>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile)))</SqliteZipPath>
     <SqliteSrcDirectory>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteSrc)))</SqliteSrcDirectory>
     <SqliteMakefile>$([System.IO.Path]::Combine($(SqliteSrcDirectory),'Makefile'))</SqliteMakefile>
-    <SqliteNativeLibrary>/opt/homebrew/Cellar/sqlite/3.51.1/lib/libsqlite3.a</SqliteNativeLibrary>
+    <SqliteNativeLibrary>/opt/homebrew/opt/sqlite/lib/libsqlite3.a</SqliteNativeLibrary>
+    <SqliteNativeLibrary Condition="!Exists($(SqliteNativeLibrary))">/usr/local/opt/sqlite/lib/libsqlite3.a</SqliteNativeLibrary>
     <SqliteNativeLibrary Condition="!Exists($(SqliteNativeLibrary))">$([System.IO.Path]::Combine($(SqliteSrcDirectory),'libsqlite3.a'))</SqliteNativeLibrary>
   </PropertyGroup>
 
