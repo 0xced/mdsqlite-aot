@@ -30,6 +30,6 @@ This will download and build SQLite 3.51.1 (see the `BuildSqlite` target) and bu
 This will print
 
 ```
-✔️ Microsoft.Data.Sqlite 10.0.1 is working with Native AOT and e_sqlite3 version 3.51.1
+✔️ Microsoft.Data.Sqlite 10.0.5 is working with Native AOT and e_sqlite3 version 3.53.0
 ```
 

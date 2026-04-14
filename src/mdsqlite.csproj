@@ -13,16 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.5" />
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.2" />
     <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup>
-    <SqliteSrc>sqlite-src-3510100</SqliteSrc>
-    <SqliteZipFile>$(SqliteSrc).zip</SqliteZipFile>
+    <SqliteUrl>https://sqlite.org/2026/sqlite-src-3530000.zip</SqliteUrl>
+    <SqliteZipFile>$([System.IO.Path]::GetFileName('$(SqliteUrl)'))</SqliteZipFile>
     <SqliteZipPath>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile)))</SqliteZipPath>
-    <SqliteSrcDirectory>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteSrc)))</SqliteSrcDirectory>
+    <SqliteSrcDirectory>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile.Split('.')[0])))</SqliteSrcDirectory>
     <SqliteMakefile>$([System.IO.Path]::Combine($(SqliteSrcDirectory),'Makefile'))</SqliteMakefile>
     <SqliteNativeLibrary>/opt/homebrew/opt/sqlite/lib/libsqlite3.a</SqliteNativeLibrary>
     <SqliteNativeLibrary Condition="!Exists($(SqliteNativeLibrary))">/usr/local/opt/sqlite/lib/libsqlite3.a</SqliteNativeLibrary>
@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <Target Name="BuildSqlite" BeforeTargets="LinkNative" Condition="!Exists($(SqliteNativeLibrary))">
-    <DownloadFile SourceUrl="https://sqlite.org/2025/$(SqliteZipFile)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteZipPath))" />
+    <DownloadFile SourceUrl="$(SqliteUrl)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteZipPath))" />
     <Unzip SourceFiles="$(SqliteZipPath)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteSrcDirectory))" />
     <Exec Command="./configure --all" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteMakefile))" />
     <Exec Command="make -j 8" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteNativeLibrary))" />
