@@ -15,7 +15,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.5" />
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.2" />
-    <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" PrivateAssets="all" />
+    <!-- SourceGear.sqlite3 is required when running a non published app
+         PrivateAssets="all" is set when publishing in AOT to avoid copying the native lib to the publish directory -->
+    <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" PrivateAssets="all" Condition="$(PublishAot) == 'true'" />
+    <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" Condition="$(PublishAot) != 'true'" />
   </ItemGroup>
 
   <PropertyGroup>
