@@ -21,6 +21,10 @@ dotnet publish
 
 This will download and build SQLite 3.51.4 (see the `BuildSqlite` target) and build a single `mdsqlite` executable **statically linked** to the SQLite native library.
 
+> [!TIP]
+>
+> If a static library exists at either `/opt/homebrew/opt/sqlite/lib/libsqlite3.a` or `/usr/local/opt/sqlite/lib/libsqlite3.a` it will be used instead of downloading and compiling SQLite from source to make the build faster.
+
 2. Run the executable
 
 ```sh
