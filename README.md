@@ -19,7 +19,7 @@ cd mdsqlite-aot
 dotnet publish
 ```
 
-This will download and build SQLite 3.51.1 (see the `BuildSqlite` target) and build a single `mdsqlite` executable **statically linked** to the SQLite native library.
+This will download and build SQLite 3.51.4 (see the `BuildSqlite` target) and build a single `mdsqlite` executable **statically linked** to the SQLite native library.
 
 2. Run the executable
 
@@ -30,6 +30,6 @@ This will download and build SQLite 3.51.1 (see the `BuildSqlite` target) and bu
 This will print
 
 ```
-✔️ Microsoft.Data.Sqlite 10.0.5 is working with Native AOT and e_sqlite3 version 3.53.0
+✔️ Microsoft.Data.Sqlite 10.0.11 is working with Native AOT and e_sqlite3 version 3.53.4
 ```
 

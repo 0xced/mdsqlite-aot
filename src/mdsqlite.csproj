@@ -13,16 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.8" />
-    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.11" />
+    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.5" />
     <!-- SourceGear.sqlite3 is required when running a non published app
          PrivateAssets="all" is set when publishing in AOT to avoid copying the native lib to the publish directory -->
-    <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" PrivateAssets="all" Condition="$(PublishAot) == 'true'" />
-    <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" Condition="$(PublishAot) != 'true'" />
+    <PackageReference Include="SourceGear.sqlite3" Version="3.53.4" PrivateAssets="all" Condition="$(PublishAot) == 'true'" />
+    <PackageReference Include="SourceGear.sqlite3" Version="3.53.4" Condition="$(PublishAot) != 'true'" />
   </ItemGroup>
 
   <PropertyGroup>
-    <SqliteUrl>https://sqlite.org/2026/sqlite-src-3530100.zip</SqliteUrl>
+    <SqliteUrl>https://sqlite.org/2026/sqlite-src-3530400.zip</SqliteUrl>
     <SqliteZipFile>$([System.IO.Path]::GetFileName('$(SqliteUrl)'))</SqliteZipFile>
     <SqliteZipPath>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile)))</SqliteZipPath>
     <SqliteSrcDirectory>$([System.IO.Path]::Combine($(BaseIntermediateOutputPath),$(SqliteZipFile.Split('.')[0])))</SqliteSrcDirectory>
