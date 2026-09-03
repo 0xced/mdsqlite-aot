@@ -37,3 +37,26 @@ This will print
 ✔️ Microsoft.Data.Sqlite 10.0.11 is working with Native AOT and e_sqlite3 version 3.53.4
 ```
 
+## Testing on Linux with an interactive Docker container
+
+On macOS:
+
+```sh
+docker run --interactive --tty --rm --volume "$(pwd):/home" mcr.microsoft.com/dotnet/sdk:10.0 /bin/bash
+```
+
+On Windows:
+
+```cmd
+set pwd=/%cd:\=/%
+docker run --interactive --tty --rm --volume "%pwd::=%:/home" mcr.microsoft.com/dotnet/sdk:10.0 /bin/bash
+```
+
+Once in the container shell, move to the volume mounted at `/home` and install the required dependencies to build SQLite from source before publishing
+
+```sh
+cd home
+apt update && apt install clang tcl-dev -y
+dotnet publish
+```
+

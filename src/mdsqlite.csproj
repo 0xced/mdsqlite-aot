@@ -35,7 +35,10 @@
   <Target Name="BuildSqlite" BeforeTargets="LinkNative" Condition="!Exists($(SqliteNativeLibrary))">
     <DownloadFile SourceUrl="$(SqliteUrl)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteZipPath))" />
     <Unzip SourceFiles="$(SqliteZipPath)" DestinationFolder="$(BaseIntermediateOutputPath)" Condition="!Exists($(SqliteSrcDirectory))" />
-    <Exec Command="./configure --all" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteMakefile))" />
+    <!-- The disable-rpath options is required when running under mcr.microsoft.com/dotnet/sdk:10.0 to prevent this issue
+         > cc : error unrecognized command-line option '-rpath'
+    -->
+    <Exec Command="./configure --all --disable-rpath" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteMakefile))" />
     <Exec Command="make -j 8" WorkingDirectory="$(SqliteSrcDirectory)" Condition="!Exists($(SqliteNativeLibrary))" />
   </Target>
 
