@@ -4,7 +4,7 @@ See https://github.com/0xced/mdsqlite-costura for packaging Microsoft.Data.Sqlit
 
 ## Motivation
 
-After reading [Multiplatform AOT with SQLite: How to get it working!](https://www.mostlylucid.net/blog/en/multiplatform-aot-sqlite) by [Scott Galloway](https://hachyderm.io/@scottgal) I wanted to go one step further and getting rid of the SQLite native dynamic library altogether. It turns out it's possible to achieve by applying instructions found on [Native code interop with Native AOT - linking](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop#linking).
+After reading [Multiplatform AOT with SQLite: How to get it working!](https://www.mostlylucid.net/blog/en/multiplatform-aot-sqlite) by [Scott Galloway](https://hachyderm.io/@scottgal) ([local copy](resources/Multiplatform AOT with SQLite.html)) I wanted to go one step further and getting rid of the SQLite native dynamic library altogether. It turns out it's possible to achieve by applying instructions found on [Native code interop with Native AOT - linking](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop#linking).
 
 > [!NOTE]
 > This has only been tested on macOS. It should work the same on Linux but will require a few adaptations to properly work on Windows.
